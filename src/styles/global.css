@@ -2,20 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --hue: 162;
-
-  --green-300: var(--hue) 100% 35%;
-  --green-500: var(--hue) 100% 26%;
-  --green-700: var(--hue) 98% 19%;
-
-  --blue-500: calc(var(--hue) + 34) 88% 74%;
-
-  --orange-500: calc(var(--hue) - 130) 96% 64%;
-
-  --red-500: calc(var(--hue) + 193) 91% 66%;
-}
-
 body {
   @apply bg-gray-900 text-gray-100 scrollbar-thin scrollbar-thumb-current;
 

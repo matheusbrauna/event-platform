@@ -3,23 +3,26 @@ module.exports = {
   content: ['./src/**/*.tsx'],
   theme: {
     extend: {
+      backgroundImage: {
+        blur: 'url(/src/assets/blur-background.png)',
+      },
       fontFamily: {
         sans: 'Roboto, sans-serif',
       },
       colors: {
-        primary: {
-          300: 'hsl(var(--green-300) / 100)',
-          500: 'hsl(var(--green-500) / 100)',
-          700: 'hsl(var(--green-700) / 100)',
+        green: {
+          300: '#00B37E',
+          500: '#00875F',
+          700: '#015F43',
         },
         blue: {
-          500: 'hsl(var(--blue-500) / 100)',
+          500: '#81D8F7',
         },
         orange: {
-          500: 'hsl(var(--orange-500) / 100)',
+          500: '#FBA94C',
         },
         red: {
-          500: 'hsl(var(--red-500) / 100)',
+          500: '#F75A68',
         },
         gray: {
           100: '#E1E1E6',

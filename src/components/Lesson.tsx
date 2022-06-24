@@ -35,7 +35,7 @@ export function Lesson(props: LessonProps) {
             </span>
           )}
 
-          <span className="text-xs rounded px-2 py-[0.125rem] text-white border border-primary-500">
+          <span className="text-xs rounded px-2 py-[0.125rem] text-white border border-green-500">
             {props.type === 'live' ? 'AO VIVO' : 'AULA PRÁTICA'}
           </span>
         </header>
