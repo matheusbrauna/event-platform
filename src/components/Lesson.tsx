@@ -1,36 +1,31 @@
-import { CheckCircle, Lock } from 'phosphor-react';
-import { isPast, format } from 'date-fns';
-import ptBR from 'date-fns/locale/pt-BR';
-import { Link, useParams } from 'react-router-dom';
+import { CheckCircle, Lock } from "phosphor-react";
+import { isPast, format } from "date-fns";
+import { Link, useParams } from "react-router-dom";
 
-import classNames from 'classnames';
+import classNames from "classnames";
+import { dateFormatter } from "../utils/date-formmater";
 
 interface LessonProps {
   title: string;
-  slug: string;
+  _slug: string;
   availableAt: Date;
-  type: 'class' | 'live';
+  type: "class" | "live";
 }
 
-export function Lesson(props: LessonProps) {
+export function Lesson({ availableAt, _slug, title, type }: LessonProps) {
   const { slug } = useParams<{ slug: string }>();
-  const isLessonAvailable = isPast(props.availableAt);
-  const dateFormat = "EEEE' • 'd' de 'MMMM' • 'k'h'mm";
-  const availableDateFormatted = format(props.availableAt, dateFormat, {
-    locale: ptBR,
-  });
-
-  const isActiveLesson = slug === props.slug;
+  const isLessonAvailable = isPast(availableAt);
+  const isActiveLesson = slug === _slug;
+  const { formattedDate } = dateFormatter({ date: availableAt });
 
   return (
-    <Link to={`/event/lesson/${props.slug}`} className="group">
-      <span className="text-gray-300">{availableDateFormatted}</span>
-
+    <Link to={`/event/lesson/${_slug}`} className="group">
+      <span className="text-gray-300">{formattedDate}</span>
       <div
         className={classNames(
-          'rounded border border-gray-500 p-4 mt-2 group-hover:border-green-500',
+          "rounded border border-gray-500 p-4 mt-2 group-hover:border-green-500",
           {
-            'bg-green-500': isActiveLesson,
+            "bg-green-500": isActiveLesson,
           }
         )}
       >
@@ -38,10 +33,10 @@ export function Lesson(props: LessonProps) {
           {isLessonAvailable ? (
             <span
               className={classNames(
-                'text-sm text-blue-500 font-medium flex items-center gap-2',
+                "text-sm text-blue-500 font-medium flex items-center gap-2",
                 {
-                  'text-white': isActiveLesson,
-                  'text-blue-500': !isActiveLesson,
+                  "text-white": isActiveLesson,
+                  "text-blue-500": !isActiveLesson,
                 }
               )}
             >
@@ -49,32 +44,30 @@ export function Lesson(props: LessonProps) {
               Conteúdo liberado
             </span>
           ) : (
-            <span className="text-sm text-orange-500 font-medium flex items-center gap-2">
+            <span className="flex items-center gap-2 text-sm font-medium text-orange-500">
               <Lock size={20} />
               Em breve
             </span>
           )}
-
           <span
             className={classNames(
-              'text-xs rounded px-2 py-[0.125rem] text-white border',
+              "text-xs rounded px-2 py-[0.125rem] text-white border uppercase",
               {
-                'border-white': isActiveLesson,
-                'border-green-500': !isActiveLesson,
+                "border-white": isActiveLesson,
+                "border-green-500": !isActiveLesson,
               }
             )}
           >
-            {props.type === 'live' ? 'AO VIVO' : 'AULA PRÁTICA'}
+            {type === "live" ? "Ao Vivo" : "Aula Prática"}
           </span>
         </header>
-
         <strong
-          className={classNames('mt-5 block', {
-            'text-white': isActiveLesson,
-            'text-gray-200': !isActiveLesson,
+          className={classNames("mt-5 block", {
+            "text-white": isActiveLesson,
+            "text-gray-200": !isActiveLesson,
           })}
         >
-          {props.title}
+          {title}
         </strong>
       </div>
     </Link>
